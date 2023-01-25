@@ -42,6 +42,7 @@ void loadWorld(PImage img) {
       if (c == black) {
         FBox b = new FBox(gridSize, gridSize);
         b.setPosition(x*gridSize, y*gridSize);
+        b.setFill(black);
         b.setStatic(true);
         world.add(b);
       }
