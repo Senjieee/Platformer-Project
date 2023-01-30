@@ -8,6 +8,7 @@ class FLava extends FGameObject {
     setPosition(x, y);
     setName("lave");
     setStatic(true);
+    setSensor(true);
   }
 
   void act() {

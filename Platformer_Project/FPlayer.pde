@@ -2,13 +2,13 @@ class FPlayer extends FGameObject {
   
   int frame;
   int direction;
-  final int L = -1;
-  final int R = 1;
+  int lives;
   
   FPlayer() {
     super();
     frame = 0;
     direction = R;
+    lives = 3;
     setPosition(width/2, height/3);
     setName("player");
     setRotatable(false);
@@ -19,6 +19,7 @@ class FPlayer extends FGameObject {
     input();
     collisions();
     animate();
+    showLives();
   }
   
   void animate() {
@@ -32,7 +33,9 @@ class FPlayer extends FGameObject {
   
   void input() {
     float vx = getVelocityX();
-    if (wkey) setVelocity(vx, -500);
+    //if (isTouching("stone" || "grass" || "dirt" || "ice" || "treetop" || "spike" || "trampoline" || "bridge")) {
+      if (wkey) setVelocity(vx, -500);
+    //}
     if (skey) setVelocity(vx, getVelocityY()+30);
     float vy = getVelocityY();
     if (vy == 0) {
@@ -62,5 +65,30 @@ class FPlayer extends FGameObject {
   
   void death() {
     setPosition(width/2, height/3);
+    lives--;
+  }
+  
+  void showLives() {
+    fill(black);
+    textSize(45);
+    text("x" + lives, 20, 555);
+    if (lives > 2) lifePoints(165, 500);
+    if (lives > 1) lifePoints(125, 500);
+    if (lives > 0) lifePoints(80, 500);
+  }
+  
+  void lifePoints(float x, float y) {
+    fill(red);
+    noStroke();
+    rect(x, y + 25, 10, 5);
+    rect(x + 15, y + 25, 10, 5);
+    rect(x + 5, y + 30, 25, 5);
+    rect(x - 5, y + 30, 5, 10);
+    rect(x, y + 35, 25, 10);
+    rect(x + 5, y + 45, 15, 5);
+    rect(x + 10, y + 50, 5, 5);
+    rect(x + 25, y + 35, 5, 5);
+    fill(white);
+    rect(x, y + 30, 5, 5);
   }
 }
