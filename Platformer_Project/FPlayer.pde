@@ -74,7 +74,7 @@ class FPlayer extends FGameObject {
   }
   
   void death() {
-    setPosition(width/2, height/3);
+    setPosition(width/2 + 100, height/2 + 400);
     lives--;
     breath = 700;
   }

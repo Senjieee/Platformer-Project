@@ -25,7 +25,7 @@ class FWater extends FGameObject {
   }
   
   void suffocate() {
-    if ((isTouching("player") && player.getY() >= getY()) || player.getY() > getY() && player.getX() > getX() - gridSize/2 && player.getX() < getX() + gridSize/2) {
+    if ((isTouching("player") && player.getY() >= getY()) || player.getY() > getY() && player.getY() < getY() + gridSize && player.getX() > getX() - gridSize/2 && player.getX() < getX() + gridSize/2) {
       player.breath--;
     } 
     if (player.breath > 700) player.breath = 700;
