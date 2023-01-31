@@ -6,7 +6,7 @@ class FGoomba extends FGameObject {
   int lives;
   
   FGoomba(float x, float y) {
-    super();
+    super(1, 1);
     setPosition(x, y);
     lives = 1;
     setName("goomba");

@@ -22,14 +22,20 @@ color treeGreen = #19fa5c;
 color border = #464646;
 color goombaBrown = #8E4813;
 color wall = #B9ACA1;
+color waterBlue = #11B5F0;
+color air1 = #0A97C9;
+color air2 = #80CFEA;
+color thwompGrey = #585454;
 
 PImage map;
-PImage grass, dirt, ice, trampoline, stone, trunk, treeCenter, treeSides, treeLeft, treeRight, spike, bridge;
+PImage grass, dirt, dirtLeft, dirtRight, ice, trampoline, stone, trunk, treeCenter, treeSides, treeLeft, treeRight, spike, bridge, asleepThwomp, awakeThwomp;
 
 PImage[] idle;
 PImage[] jump;
 PImage[] run;
 PImage[] action;
+
+PImage[] water;
 
 PImage[] lava;
 
@@ -58,6 +64,8 @@ void loadImages() {
   map = loadImage("map.png");
   grass = loadImage("dirt_n.png");
   dirt = loadImage("dirt_center.png");
+  dirtRight = loadImage("dirt_ne.png");
+  dirtLeft = loadImage("dirt_nw.png");
   ice = loadImage("blueBlock.png");
   stone = loadImage("brick.png");
   trampoline = loadImage("trampoline");
@@ -77,6 +85,12 @@ void loadImages() {
   lava[4] = loadImage("lava4.png");
   lava[5] = loadImage("lava5.png");
   
+  water = new PImage[4];
+  water[0] = loadImage("water1.png");
+  water[1] = loadImage("water2.png");
+  water[2] = loadImage("water3.png");
+  water[3] = loadImage("water4.png");
+  
   //enemy animation
   
   goomba = new PImage[2];
@@ -84,6 +98,9 @@ void loadImages() {
   goomba[0].resize(gridSize, gridSize);
   goomba[1] = loadImage("goomba1.png");
   goomba[1].resize(gridSize, gridSize);
+  
+  asleepThwomp = loadImage("thwomp0.png");
+  awakeThwomp = loadImage("thwomp1.png");
   
   //player animation
   
@@ -201,10 +218,21 @@ void loadWorld(PImage img) {
         terrain.add(lv);
         world.add(lv);
       }
+      else if (c == waterBlue) {
+        FWater wtr = new FWater(x*gridSize, y*gridSize);
+        terrain.add(wtr);
+        world.add(wtr);
+      }
       else if (c == goombaBrown) {
         FGoomba gmb = new FGoomba(x*gridSize, y*gridSize);
         enemies.add(gmb);
         world.add(gmb);
+      }
+      else if (c == thwompGrey) {
+        FThwomp twp = new FThwomp(x*gridSize + gridSize/2, y*gridSize + gridSize/2);
+        twp.setFriction(4);
+        enemies.add(twp);
+        world.add(twp);
       }
     }
   }

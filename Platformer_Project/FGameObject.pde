@@ -3,8 +3,8 @@ class FGameObject extends FBox {
   final int L = -1;
   final int R = 1;
   
-  FGameObject() {
-    super(gridSize, gridSize);
+  FGameObject(int w, int h) {
+    super(gridSize*w, gridSize*h);
   }
   
   void act() {

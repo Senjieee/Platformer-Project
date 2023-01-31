@@ -3,12 +3,14 @@ class FPlayer extends FGameObject {
   int frame;
   int direction;
   int lives;
+  float breath;
   
   FPlayer() {
-    super();
+    super(1, 1);
     frame = 0;
     direction = R;
     lives = 3;
+    breath = 700;
     setPosition(width/2, height/3);
     setName("player");
     setRotatable(false);
@@ -20,6 +22,8 @@ class FPlayer extends FGameObject {
     collisions();
     animate();
     showLives();
+    if (breath < 700) showBreath();
+    breath++;
   }
   
   void animate() {
@@ -58,22 +62,29 @@ class FPlayer extends FGameObject {
     if (isTouching("spike")) {
       death();
     }
-    if (isTouching("lave")) {
+    if (isTouching("lava")) {
       death();
     }
+    if (isTouching("water")) {
+      float vx = getVelocityX();
+      float vy = getVelocityY();
+      setVelocity(vx, vy/1.5);
+    }
+    if (breath <= 0) death();
   }
   
   void death() {
     setPosition(width/2, height/3);
     lives--;
+    breath = 700;
   }
   
   void showLives() {
     fill(black);
     textSize(45);
     text("x" + lives, 20, 555);
-    if (lives > 2) lifePoints(165, 500);
-    if (lives > 1) lifePoints(125, 500);
+    if (lives > 2) lifePoints(160, 500);
+    if (lives > 1) lifePoints(120, 500);
     if (lives > 0) lifePoints(80, 500);
   }
   
@@ -90,5 +101,31 @@ class FPlayer extends FGameObject {
     rect(x + 25, y + 35, 5, 5);
     fill(white);
     rect(x, y + 30, 5, 5);
+  }
+  
+  void showBreath() {
+    if (breath > 0) air(25, 490);
+    if (breath > 100) air(49, 490);
+    if (breath > 200) air(73, 490);
+    if (breath > 300) air(97, 490);
+    if (breath > 400) air(121, 490);
+    if (breath > 500) air(145, 490);
+    if (breath > 600) air(169, 490);
+  }
+  
+  void air(float x, float y) {
+    fill(air1);
+    rect(x, y, 9, 3);
+    rect(x + 9, y + 3, 3, 3);
+    rect(x - 3, y + 3, 3, 3);
+    rect(x - 6, y + 6, 3, 9);
+    rect(x - 3, y + 15, 3, 3);
+    fill(air2);
+    rect(x + 12, y + 6, 3, 9);
+    rect(x + 9, y + 15, 3, 3);
+    rect(x, y + 18, 9, 3);
+    fill(white);
+    rect(x, y + 6, 6, 3);
+    rect(x, y + 9, 3, 3);
   }
 }

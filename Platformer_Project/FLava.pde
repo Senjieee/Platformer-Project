@@ -3,10 +3,10 @@ class FLava extends FGameObject {
   int frame;
 
   FLava(float x, float y) {
-    super();
+    super(1, 1);
     frame = 0;
     setPosition(x, y);
-    setName("lave");
+    setName("lava");
     setStatic(true);
     setSensor(true);
   }
