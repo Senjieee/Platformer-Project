@@ -11,7 +11,7 @@ class FPlayer extends FGameObject {
     direction = R;
     lives = 3;
     breath = 700;
-    setPosition(width/2, height/3);
+    setPosition(width/2 + 100, height/2 + 400);
     setName("player");
     setRotatable(false);
     setFillColor(red);
@@ -37,9 +37,9 @@ class FPlayer extends FGameObject {
   
   void input() {
     float vx = getVelocityX();
-    //if (isTouching("stone" || "grass" || "dirt" || "ice" || "treetop" || "spike" || "trampoline" || "bridge")) {
+    if (isTouching("goomba") || isTouching("thwomp") || isTouching("stone") || isTouching("grass") || isTouching("dirt") || isTouching("ice") || isTouching("treetop") || isTouching("spike") || isTouching("trampoline") || isTouching("bridge") || isTouching("wall")) {
       if (wkey) setVelocity(vx, -500);
-    //}
+    }
     if (skey) setVelocity(vx, getVelocityY()+30);
     float vy = getVelocityY();
     if (vy == 0) {
